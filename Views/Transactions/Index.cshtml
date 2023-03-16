@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BankTransaction.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Transaction";
+}
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AccountNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BeneficiaryName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BankName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SWIFFTCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        <p>
+                            <a asp-action="AddorEdit" class="btn btn-success w-80">
+                                <i class="fa-sharp fa-solid fa-plus"></i> New Account
+                            </a>
+                        </p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BeneficiaryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BankName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SWIFFTCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+
+ 
+
+                            @*                //edit deatils and de;ete buttons
+                        *@                    <form asp-action="Delete" asp-route-id="@item.TransactionId">
+
+                        <div class="btn-group btn-group-sm w-100">
+                                    @*                        //edit
+                                *@                        <a asp-action="AddorEdit" asp-route-id="@item.TransactionId" class="btn btn-secondary">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+
+                                    @*                            //details
+                                *@                        <a asp-action="Details" asp-route-id="@item.TransactionId" class="btn btn-warning">
+                                        <i class="fa-sharp fa-solid fa-circle-info"></i>
+                                    </a>
+
+
+                                    @*                            //delete
+                                *@                        <button type="submit" class="btn btn-danger"
+                                                                      onclick="return confirm('Are Your sure you want to delete this record')">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
